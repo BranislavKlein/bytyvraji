@@ -39,7 +39,7 @@ export default function Navigation() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         isScrolled
           ? 'bg-white/98 shadow-md backdrop-blur-xl'
-          : 'bg-white/10 backdrop-blur-md'
+          : 'bg-black/30 backdrop-blur-md'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -107,7 +107,7 @@ export default function Navigation() {
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className={`border-t ${isScrolled ? 'bg-white/98 border-stone-200' : 'bg-white/10 backdrop-blur-md border-white/20'}`}>
+        <div className={`border-t ${isScrolled ? 'bg-white/98 border-stone-200' : 'bg-black/30 backdrop-blur-md border-white/20'}`}>
           <div className="py-2">
             <Link
               to="/podorys"
