@@ -161,6 +161,57 @@ export default function FloorPlanPage() {
           </div>
         </section>
 
+        {/* APARTMENTS TABLE */}
+        <section className="bg-white border border-amber-200 rounded-xl shadow-lg shadow-amber-100 p-6 md:p-10">
+          <h2 className="text-2xl font-light text-stone-900 mb-6 flex flex-wrap items-center gap-3">
+            <span className="font-medium text-stone-900">
+              Dostupnosť bytov
+            </span>
+            <span className="text-[11px] font-medium text-amber-600 bg-amber-50 rounded-full border border-amber-200 px-2 py-[2px] shadow-[0_10px_20px_rgba(251,146,60,0.25)]">
+              {activeFloor}. poschodie
+            </span>
+          </h2>
+
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b-2 border-amber-200">
+                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Byt č.</th>
+                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Poschodie</th>
+                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Typ</th>
+                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Výmera</th>
+                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: 8 }, (_, i) => i + 1).map((num) => (
+                  <tr key={num} className="border-b border-stone-200 hover:bg-amber-50/30 transition-colors">
+                    <td className="py-4 px-4 text-stone-800 font-medium">{num}</td>
+                    <td className="py-4 px-4 text-stone-600">{activeFloor}NP</td>
+                    <td className="py-4 px-4 text-stone-600">
+                      {num <= 2 ? '1-izbový' : num <= 5 ? '2-izbový' : '3-izbový'}
+                    </td>
+                    <td className="py-4 px-4 text-stone-600">
+                      {num <= 2 ? '35-45 m²' : num <= 5 ? '55-65 m²' : '75-85 m²'}
+                    </td>
+                    <td className="py-4 px-4">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700 border border-amber-200">
+                        Dostupný
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-stone-200">
+            <p className="text-sm text-stone-600 font-light">
+              Pre viac informácií o konkrétnom byte, jeho cene alebo obhliadke nás kontaktujte.
+            </p>
+          </div>
+        </section>
+
       </section>
     </div>
   );
