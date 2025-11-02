@@ -246,7 +246,7 @@ export default function FloorPlanPage() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-100">
+                  <tbody className="divide-y divide-stone-200">
                     {filteredApartments.map((apt, index) => {
                       const statusConfig = {
                         available: {
