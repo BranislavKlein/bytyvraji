@@ -250,25 +250,25 @@ export default function FloorPlanPage() {
                     {filteredApartments.map((apt, index) => {
                       const statusConfig = {
                         available: {
-                          bg: 'bg-emerald-50/60',
-                          text: 'text-emerald-800',
-                          border: 'border-emerald-300/40',
+                          bg: 'bg-emerald-100/50',
+                          text: 'text-emerald-900',
+                          border: 'border-emerald-400/50',
                           label: 'Dostupný',
-                          dot: 'bg-emerald-600',
+                          dot: 'bg-emerald-700',
                         },
                         reserved: {
-                          bg: 'bg-amber-50/60',
-                          text: 'text-amber-800',
-                          border: 'border-amber-300/40',
+                          bg: 'bg-amber-100/50',
+                          text: 'text-amber-900',
+                          border: 'border-amber-400/50',
                           label: 'Rezervovaný',
-                          dot: 'bg-amber-600',
+                          dot: 'bg-amber-700',
                         },
                         sold: {
-                          bg: 'bg-stone-100/60',
-                          text: 'text-stone-700',
-                          border: 'border-stone-300/40',
+                          bg: 'bg-stone-200/50',
+                          text: 'text-stone-800',
+                          border: 'border-stone-400/50',
                           label: 'Predaný',
-                          dot: 'bg-stone-600',
+                          dot: 'bg-stone-700',
                         },
                       };
 
@@ -283,11 +283,9 @@ export default function FloorPlanPage() {
                           className="group hover:bg-amber-50/50 transition-all duration-200"
                         >
                           <td className="py-5 px-6">
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-amber-500/30">
-                                {apt.apartment_number}
-                              </div>
-                            </div>
+                            <span className="text-stone-900 font-bold text-lg">
+                              {apt.apartment_number}
+                            </span>
                           </td>
                           <td className="py-5 px-6">
                             <span className="text-stone-700 font-medium">
@@ -342,15 +340,15 @@ export default function FloorPlanPage() {
                 </div>
                 <div className="flex gap-2 items-center text-xs text-stone-500">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-700"></span>
                     <span>Voľné</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                    <span className="w-2 h-2 rounded-full bg-amber-700"></span>
                     <span>Rezervované</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-stone-600"></span>
+                    <span className="w-2 h-2 rounded-full bg-stone-700"></span>
                     <span>Predané</span>
                   </div>
                 </div>
