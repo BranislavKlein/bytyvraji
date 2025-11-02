@@ -250,25 +250,25 @@ export default function FloorPlanPage() {
                     {filteredApartments.map((apt, index) => {
                       const statusConfig = {
                         available: {
-                          bg: 'bg-emerald-50',
-                          text: 'text-emerald-700',
-                          border: 'border-emerald-200',
+                          bg: 'bg-emerald-50/60',
+                          text: 'text-emerald-800',
+                          border: 'border-emerald-300/40',
                           label: 'Dostupný',
-                          dot: 'bg-emerald-500',
+                          dot: 'bg-emerald-600',
                         },
                         reserved: {
-                          bg: 'bg-amber-50',
-                          text: 'text-amber-700',
-                          border: 'border-amber-200',
+                          bg: 'bg-amber-50/60',
+                          text: 'text-amber-800',
+                          border: 'border-amber-300/40',
                           label: 'Rezervovaný',
-                          dot: 'bg-amber-500',
+                          dot: 'bg-amber-600',
                         },
                         sold: {
-                          bg: 'bg-stone-100',
-                          text: 'text-stone-600',
-                          border: 'border-stone-300',
+                          bg: 'bg-stone-100/60',
+                          text: 'text-stone-700',
+                          border: 'border-stone-300/40',
                           label: 'Predaný',
-                          dot: 'bg-stone-500',
+                          dot: 'bg-stone-600',
                         },
                       };
 
@@ -342,15 +342,15 @@ export default function FloorPlanPage() {
                 </div>
                 <div className="flex gap-2 items-center text-xs text-stone-500">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
                     <span>Voľné</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
                     <span>Rezervované</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-stone-500"></span>
+                    <span className="w-2 h-2 rounded-full bg-stone-600"></span>
                     <span>Predané</span>
                   </div>
                 </div>
