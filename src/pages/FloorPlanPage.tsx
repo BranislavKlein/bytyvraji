@@ -1,13 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import FloorPlan from "../components/FloorPlan";
 import FloorMap1NP from "../components/FloorMap1NP";
 import FloorMap2NP from "../components/FloorMap2NP";
 import FloorMap3NP from "../components/FloorMap3NP";
+import { supabase } from "../lib/supabase";
+
+interface Apartment {
+  id: string;
+  apartment_number: string;
+  floor: number;
+  rooms: number;
+  area_sqm: number;
+  price: number;
+  status: 'available' | 'reserved' | 'sold';
+  balcony: boolean;
+  terrace: boolean;
+}
 
 export default function FloorPlanPage() {
   const [activeFloor, setActiveFloor] = useState<1 | 2 | 3>(3);
+  const [apartments, setApartments] = useState<Apartment[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchApartments();
+  }, []);
+
+  const fetchApartments = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('apartments')
+        .select('*')
+        .order('floor', { ascending: true })
+        .order('apartment_number', { ascending: true });
+
+      if (error) throw error;
+      setApartments(data || []);
+    } catch (error) {
+      console.error('Error fetching apartments:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredApartments = apartments.filter(apt => apt.floor === activeFloor);
 
   const floorLabel: Record<number, string> = {
     1: "1. Prízemné podlažie",
@@ -162,53 +200,162 @@ export default function FloorPlanPage() {
         </section>
 
         {/* APARTMENTS TABLE */}
-        <section className="bg-white border border-amber-200 rounded-xl shadow-lg shadow-amber-100 p-6 md:p-10">
-          <h2 className="text-2xl font-light text-stone-900 mb-6 flex flex-wrap items-center gap-3">
-            <span className="font-medium text-stone-900">
-              Dostupnosť bytov
-            </span>
-            <span className="text-[11px] font-medium text-amber-600 bg-amber-50 rounded-full border border-amber-200 px-2 py-[2px] shadow-[0_10px_20px_rgba(251,146,60,0.25)]">
-              {activeFloor}. poschodie
-            </span>
-          </h2>
-
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b-2 border-amber-200">
-                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Byt č.</th>
-                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Poschodie</th>
-                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Typ</th>
-                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Výmera</th>
-                  <th className="text-left py-4 px-4 text-sm font-medium text-stone-700 uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.from({ length: 8 }, (_, i) => i + 1).map((num) => (
-                  <tr key={num} className="border-b border-stone-200 hover:bg-amber-50/30 transition-colors">
-                    <td className="py-4 px-4 text-stone-800 font-medium">{num}</td>
-                    <td className="py-4 px-4 text-stone-600">{activeFloor}NP</td>
-                    <td className="py-4 px-4 text-stone-600">
-                      {num <= 2 ? '1-izbový' : num <= 5 ? '2-izbový' : '3-izbový'}
-                    </td>
-                    <td className="py-4 px-4 text-stone-600">
-                      {num <= 2 ? '35-45 m²' : num <= 5 ? '55-65 m²' : '75-85 m²'}
-                    </td>
-                    <td className="py-4 px-4">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700 border border-amber-200">
-                        Dostupný
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <section className="bg-gradient-to-br from-white via-amber-50/20 to-white border border-amber-200 rounded-2xl shadow-2xl shadow-amber-500/10 overflow-hidden">
+          <div className="bg-gradient-to-r from-amber-500 to-amber-600 px-8 py-6">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-semibold text-white mb-1">
+                  Dostupnosť bytov
+                </h2>
+                <p className="text-amber-100 text-sm font-light">
+                  Aktuálny prehľad všetkých bytov na {activeFloor}. poschodí
+                </p>
+              </div>
+              <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/30">
+                <span className="text-white text-sm font-medium">
+                  {filteredApartments.length} bytov
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-stone-200">
-            <p className="text-sm text-stone-600 font-light">
-              Pre viac informácií o konkrétnom byte, jeho cene alebo obhliadke nás kontaktujte.
-            </p>
+          <div className="p-8">
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-4 border-amber-200 border-t-amber-600"></div>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-amber-300/50">
+                      <th className="text-left py-5 px-6 text-xs font-bold text-stone-600 uppercase tracking-wider">
+                        Byt č.
+                      </th>
+                      <th className="text-left py-5 px-6 text-xs font-bold text-stone-600 uppercase tracking-wider">
+                        Poschodie
+                      </th>
+                      <th className="text-left py-5 px-6 text-xs font-bold text-stone-600 uppercase tracking-wider">
+                        Výmera
+                      </th>
+                      <th className="text-left py-5 px-6 text-xs font-bold text-stone-600 uppercase tracking-wider">
+                        Cena
+                      </th>
+                      <th className="text-center py-5 px-6 text-xs font-bold text-stone-600 uppercase tracking-wider">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-stone-100">
+                    {filteredApartments.map((apt, index) => {
+                      const statusConfig = {
+                        available: {
+                          bg: 'bg-emerald-50',
+                          text: 'text-emerald-700',
+                          border: 'border-emerald-200',
+                          label: 'Dostupný',
+                          dot: 'bg-emerald-500',
+                        },
+                        reserved: {
+                          bg: 'bg-amber-50',
+                          text: 'text-amber-700',
+                          border: 'border-amber-200',
+                          label: 'Rezervovaný',
+                          dot: 'bg-amber-500',
+                        },
+                        sold: {
+                          bg: 'bg-stone-100',
+                          text: 'text-stone-600',
+                          border: 'border-stone-300',
+                          label: 'Predaný',
+                          dot: 'bg-stone-500',
+                        },
+                      };
+
+                      const config = statusConfig[apt.status];
+
+                      return (
+                        <motion.tr
+                          key={apt.id}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="group hover:bg-amber-50/50 transition-all duration-200"
+                        >
+                          <td className="py-5 px-6">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-amber-500/30">
+                                {apt.apartment_number}
+                              </div>
+                            </div>
+                          </td>
+                          <td className="py-5 px-6">
+                            <span className="text-stone-700 font-medium">
+                              {apt.floor}NP
+                            </span>
+                          </td>
+                          <td className="py-5 px-6">
+                            <div className="flex flex-col">
+                              <span className="text-stone-800 font-semibold">
+                                {apt.area_sqm} m²
+                              </span>
+                              <span className="text-xs text-stone-500 mt-0.5">
+                                {apt.rooms} {apt.rooms === 1 ? 'izba' : apt.rooms < 5 ? 'izby' : 'izieb'}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-5 px-6">
+                            <div className="flex flex-col">
+                              <span className="text-lg font-bold text-stone-900">
+                                {new Intl.NumberFormat('sk-SK').format(apt.price)} €
+                              </span>
+                              <span className="text-xs text-stone-500 mt-0.5">
+                                {Math.round(apt.price / apt.area_sqm)} €/m²
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-5 px-6">
+                            <div className="flex justify-center">
+                              <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold ${config.bg} ${config.text} border ${config.border} shadow-sm`}>
+                                <span className={`w-2 h-2 rounded-full ${config.dot} animate-pulse`}></span>
+                                {config.label}
+                              </span>
+                            </div>
+                          </td>
+                        </motion.tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            <div className="mt-8 pt-6 border-t border-stone-200 bg-gradient-to-r from-amber-50/50 to-transparent rounded-lg p-6">
+              <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+                <div>
+                  <p className="text-stone-800 font-medium mb-1">
+                    Máte záujem o konkrétny byt?
+                  </p>
+                  <p className="text-sm text-stone-600 font-light">
+                    Kontaktujte nás pre viac informácií, podrobné pôdorysy a termín obhliadky.
+                  </p>
+                </div>
+                <div className="flex gap-2 items-center text-xs text-stone-500">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>Voľné</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span>Rezervované</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-stone-500"></span>
+                    <span>Predané</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
