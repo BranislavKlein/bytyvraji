@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
-import { motion } from 'framer-motion';
-import { Camera } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Camera, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface GalleryImage {
   id: number;
@@ -21,10 +19,35 @@ export default function Gallery() {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  const slides = images.map((img) => ({
-    src: img.image_url,
-    alt: img.title,
-  }));
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!open) return;
+      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'ArrowLeft') setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+      if (e.key === 'ArrowRight') setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, images.length]);
+
+  const handlePrevious = () => {
+    setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <section id="gallery" className="py-24 bg-gradient-to-b from-white to-stone-50">
@@ -103,22 +126,72 @@ export default function Gallery() {
         </motion.div>
       </div>
 
-      <Lightbox
-        open={open}
-        close={() => setOpen(false)}
-        index={index}
-        slides={slides}
-        styles={{
-          container: { backgroundColor: 'rgba(0, 0, 0, 0.95)' },
-        }}
-        carousel={{
-          finite: false,
-        }}
-        animation={{
-          fade: 500,
-          swipe: 500,
-        }}
-      />
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+            onClick={() => setOpen(false)}
+          >
+            <button
+              className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors z-50 p-2 hover:bg-white/10 rounded-full"
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpen(false);
+              }}
+            >
+              <X size={32} />
+            </button>
+
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors z-50 p-2 hover:bg-white/10 rounded-full"
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevious();
+              }}
+            >
+              <ChevronLeft size={48} />
+            </button>
+
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors z-50 p-2 hover:bg-white/10 rounded-full"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+            >
+              <ChevronRight size={48} />
+            </button>
+
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-7xl max-h-[90vh] px-16"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={images[index].image_url}
+                alt={images[index].title}
+                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              />
+              <div className="text-center mt-6">
+                <p className="text-white text-xl font-light tracking-wide mb-2">
+                  {images[index].title}
+                </p>
+                <p className="text-white/60 text-sm">
+                  {index + 1} / {images.length}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
