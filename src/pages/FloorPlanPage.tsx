@@ -5,7 +5,6 @@ import FloorPlan from "../components/FloorPlan";
 import FloorMap1NP from "../components/FloorMap1NP";
 import FloorMap2NP from "../components/FloorMap2NP";
 import FloorMap3NP from "../components/FloorMap3NP";
-import Offer from "../components/Offer";
 
 export default function FloorPlanPage() {
   const [activeFloor, setActiveFloor] = useState<1 | 2 | 3>(3);
@@ -162,29 +161,6 @@ export default function FloorPlanPage() {
           </div>
         </section>
 
-        {/* CTA / Offer */}
-        <section className="rounded-xl border border-amber-300/70 bg-gradient-to-br from-amber-500 via-amber-600 to-stone-900 text-white shadow-xl shadow-amber-500/30 overflow-hidden">
-          <div className="p-6 md:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div className="space-y-4 max-w-xl">
-              <div className="text-xs uppercase tracking-[0.08em] text-amber-100 font-medium bg-amber-500/30 border border-amber-200/30 rounded-full inline-block px-3 py-1 shadow-[0_12px_30px_rgba(255,255,255,0.15)]">
-                Dostupnosť & Cena
-              </div>
-
-              <div className="text-2xl font-semibold leading-tight text-white">
-                Máte záujem o konkrétny byt?
-              </div>
-
-              <div className="text-base text-amber-50/90 font-light leading-relaxed">
-                Pozrite si aktuálnu ponuku, pôdorysy a ceny. Radi vám pošleme
-                pôdorys vo vysokom rozlíšení alebo pripravíme osobnú obhliadku.
-              </div>
-            </div>
-
-            <div className="shrink-0 w-full max-w-[260px] bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/20 shadow-[0_30px_80px_rgba(0,0,0,0.4)]">
-              <Offer />
-            </div>
-          </div>
-        </section>
       </section>
     </div>
   );
