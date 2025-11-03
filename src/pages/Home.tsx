@@ -135,7 +135,7 @@ export default function Home() {
     
 
       {/* ŠTATISTIKY – nahradené za animované karty */}
-      <section className="relative py-24 bg-stone-100 overflow-hidden">
+      <section id="stats" className="relative py-24 bg-stone-100 overflow-hidden">
         {/* ambientné pozadie len pre túto sekciu */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="absolute -top-32 -left-32 h-72 w-72 rounded-full bg-amber-300/20 blur-3xl" />

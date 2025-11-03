@@ -1,58 +1,66 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { ChevronDown } from 'lucide-react';
 
 export default function ImageSlideshow() {
   const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10];
   const images = imageNumbers.map((num) => `https://bytyvraji.sk/${num}e.jpg`);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      duration: 30,
+    },
+    [Autoplay({ delay: 5000, stopOnInteraction: false })]
+  );
+
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  const scrollToOffer = () => {
+    const element = document.getElementById('stats');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [images.length]);
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+  }, [emblaApi, onSelect]);
 
   return (
     <section className="relative h-screen overflow-hidden">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-          className="absolute inset-0"
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${images[currentIndex]})`,
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {images.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentIndex(idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              idx === currentIndex
-                ? 'w-12 bg-white'
-                : 'w-2 bg-white/40 hover:bg-white/60'
-            }`}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
+      <div className="embla h-full" ref={emblaRef}>
+        <div className="embla__container h-full flex">
+          {images.map((image, index) => (
+            <div key={index} className="embla__slide relative flex-[0_0_100%] min-w-0">
+              <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center z-10">
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,6 +78,41 @@ export default function ImageSlideshow() {
           </p>
         </motion.div>
       </div>
+
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollTo(idx)}
+            className={`relative overflow-hidden rounded-full transition-all duration-500 ${
+              idx === selectedIndex
+                ? 'w-12 h-3 bg-white shadow-lg shadow-white/50'
+                : 'w-3 h-3 bg-white/40 hover:bg-white/70 hover:scale-110'
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          >
+            {idx === selectedIndex && (
+              <motion.div
+                layoutId="activeSlide"
+                className="absolute inset-0 bg-white"
+                transition={{
+                  type: 'spring',
+                  stiffness: 380,
+                  damping: 30,
+                }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={scrollToOffer}
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white animate-bounce hover:scale-110 transition-transform z-20"
+        aria-label="Scroll down"
+      >
+        <ChevronDown size={48} strokeWidth={1.5} />
+      </button>
     </section>
   );
 }
