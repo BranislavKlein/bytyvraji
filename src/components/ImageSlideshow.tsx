@@ -37,16 +37,15 @@ export default function ImageSlideshow() {
   return (
     <section className="relative h-screen overflow-hidden bg-black">
       <div className="absolute inset-0">
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false}>
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, scale: 1.15 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, x: -100 }}
+            initial={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1.1, opacity: 1 }}
+            exit={{ scale: 1.15, opacity: 0 }}
             transition={{
-              opacity: { duration: 0.8 },
-              scale: { duration: 6, ease: "linear" },
-              x: { duration: 0.8 }
+              scale: { duration: 5, ease: "linear" },
+              opacity: { duration: 0.5 }
             }}
             className="absolute inset-0"
           >
