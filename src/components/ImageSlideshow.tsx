@@ -37,30 +37,29 @@ export default function ImageSlideshow() {
   return (
     <section className="relative h-screen overflow-hidden bg-black">
       <div className="absolute inset-0">
-        {images.map((image, idx) => (
+        <AnimatePresence mode="wait">
           <motion.div
-            key={idx}
-            initial={false}
-            animate={{
-              opacity: idx === currentIndex ? 1 : 0,
-              scale: idx === currentIndex ? 1 : 1.1,
-            }}
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 1.15 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, x: -100 }}
             transition={{
-              duration: 1.5,
-              ease: [0.22, 1, 0.36, 1],
+              opacity: { duration: 0.8 },
+              scale: { duration: 6, ease: "linear" },
+              x: { duration: 0.8 }
             }}
             className="absolute inset-0"
           >
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url(${image})`,
+                backgroundImage: `url(${images[currentIndex]})`,
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70"></div>
             </div>
           </motion.div>
-        ))}
+        </AnimatePresence>
       </div>
 
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
@@ -116,39 +115,41 @@ export default function ImageSlideshow() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-auto"
       >
-        <div className="flex items-center gap-3">
-          {images.map((_, idx) => (
-            <motion.button
-              key={idx}
-              onClick={() => goToSlide(idx)}
-              className={`rounded-full transition-all duration-500 ${
-                idx === currentIndex
-                  ? 'w-12 h-3 bg-white shadow-lg shadow-white/50'
-                  : 'w-3 h-3 bg-white/40 hover:bg-white/70'
-              }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
+        <div className="bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
+          <div className="flex items-center gap-2.5">
+            {images.map((_, idx) => (
+              <motion.button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                className={`rounded-full transition-all duration-500 ${
+                  idx === currentIndex
+                    ? 'w-10 h-2.5 bg-white shadow-lg shadow-white/50'
+                    : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
+                }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </motion.div>
 
       <motion.button
         onClick={scrollToOffer}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 12, 0] }}
+        animate={{ opacity: 1, y: [0, 10, 0] }}
         transition={{
           opacity: { delay: 2.5, duration: 1 },
-          y: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
+          y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/60 hover:text-white z-20 transition-colors"
-        whileHover={{ scale: 1.3 }}
+        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors pointer-events-auto"
+        whileHover={{ scale: 1.2 }}
         aria-label="Scroll down"
       >
-        <ChevronDown size={44} strokeWidth={1.5} />
+        <ChevronDown size={40} strokeWidth={1.5} />
       </motion.button>
     </section>
   );
