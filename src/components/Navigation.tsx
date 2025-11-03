@@ -47,7 +47,7 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         shouldBeTransparent
-          ? 'bg-gradient-to-b from-black/40 via-black/20 to-transparent backdrop-blur-sm'
+          ? 'bg-transparent'
           : 'bg-white shadow-lg border-b border-stone-100'
       }`}
     >
@@ -56,7 +56,7 @@ export default function Navigation() {
           <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
             <div className={`relative p-2 rounded-lg transition-all duration-300 ${
               shouldBeTransparent
-                ? 'bg-white/10 backdrop-blur-md group-hover:bg-white/20'
+                ? 'bg-white/20 group-hover:bg-white/30'
                 : 'bg-amber-50 group-hover:bg-amber-100'
             }`}>
               <Building2 className={`w-5 h-5 transition-all duration-300 ${
@@ -127,7 +127,7 @@ export default function Navigation() {
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-lg transition-all duration-300 ${
                 shouldBeTransparent
-                  ? 'text-white bg-white/10 hover:bg-white/20 backdrop-blur-md'
+                  ? 'text-white bg-white/20 hover:bg-white/30'
                   : 'text-stone-900 bg-stone-100 hover:bg-stone-200'
               }`}
               aria-label="Toggle menu"
@@ -145,7 +145,7 @@ export default function Navigation() {
       >
         <div className={`border-t ${
           shouldBeTransparent
-            ? 'bg-black/60 backdrop-blur-xl border-white/10'
+            ? 'bg-black/80 border-white/20'
             : 'bg-white border-stone-200'
         }`}>
           <div className="py-2">
