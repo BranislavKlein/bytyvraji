@@ -16,10 +16,10 @@ export default function Hero() {
           backgroundImage: 'url(https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920)',
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60"></div>
       </div>
 
-      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-20">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
           Byty v Raji
         </h1>
