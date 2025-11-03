@@ -123,46 +123,48 @@ export default function ImageSlideshow() {
         </motion.div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-auto"
-      >
-        <div className="flex items-center gap-3 bg-black/20 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10">
-          {images.map((_, idx) => (
-            <motion.button
-              key={idx}
-              onClick={() => goToSlide(idx)}
-              className="group"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label={`Go to slide ${idx + 1}`}
-            >
-              <div className={`transition-all duration-300 rounded-full ${
-                idx === currentIndex
-                  ? 'w-8 h-2 bg-white'
-                  : 'w-2 h-2 bg-white/40 group-hover:bg-white/70'
-              }`} />
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="pointer-events-auto"
+        >
+          <div className="flex items-center gap-3 bg-black/20 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10">
+            {images.map((_, idx) => (
+              <motion.button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                className="group"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={`Go to slide ${idx + 1}`}
+              >
+                <div className={`transition-all duration-300 rounded-full ${
+                  idx === currentIndex
+                    ? 'w-8 h-2 bg-white'
+                    : 'w-2 h-2 bg-white/40 group-hover:bg-white/70'
+                }`} />
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
 
-      <motion.button
-        onClick={scrollToOffer}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{
-          opacity: { delay: 2.5, duration: 1 },
-          y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-        }}
-        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors pointer-events-auto"
-        whileHover={{ scale: 1.2 }}
-        aria-label="Scroll down"
-      >
-        <ChevronDown size={40} strokeWidth={1.5} />
-      </motion.button>
+        <motion.button
+          onClick={scrollToOffer}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{
+            opacity: { delay: 2.5, duration: 1 },
+            y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+          }}
+          className="text-white/50 hover:text-white transition-colors pointer-events-auto"
+          whileHover={{ scale: 1.2 }}
+          aria-label="Scroll down"
+        >
+          <ChevronDown size={40} strokeWidth={1.5} />
+        </motion.button>
+      </div>
     </section>
   );
 }
