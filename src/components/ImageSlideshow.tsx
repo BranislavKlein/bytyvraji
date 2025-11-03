@@ -91,7 +91,7 @@ export default function ImageSlideshow() {
           custom={direction}
           initial={{
             opacity: 0,
-            scale: 1.1,
+            scale: 1.05,
           }}
           animate={{
             opacity: 1,
@@ -99,10 +99,10 @@ export default function ImageSlideshow() {
           }}
           exit={{
             opacity: 0,
-            scale: 0.95,
+            scale: 0.98,
           }}
           transition={{
-            duration: 1.2,
+            duration: 0.6,
             ease: [0.43, 0.13, 0.23, 0.96],
           }}
           className="absolute inset-0"
@@ -140,15 +140,15 @@ export default function ImageSlideshow() {
 
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
           className="text-center text-white px-6 max-w-6xl mx-auto"
         >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-8"
           >
             <div className="h-px w-16 bg-white/40 mx-auto mb-8"></div>
@@ -159,15 +159,15 @@ export default function ImageSlideshow() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="text-xl md:text-2xl lg:text-3xl font-extralight mb-6 tracking-widest uppercase drop-shadow-lg opacity-80"
           >
             Bytový dom
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.2 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
           >
             <div className="h-px w-24 bg-white/30 mx-auto mb-8"></div>
             <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed font-light opacity-75 drop-shadow-lg">
