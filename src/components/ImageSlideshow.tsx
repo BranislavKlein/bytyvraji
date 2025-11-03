@@ -3,8 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 export default function ImageSlideshow() {
-  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10];
-  const images = imageNumbers.map((num) => `https://bytyvraji.sk/${num}e.jpg`);
+  const images = [
+    'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    'https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    'https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    'https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=1920',
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
@@ -43,11 +49,11 @@ export default function ImageSlideshow() {
             initial={false}
             animate={{
               opacity: idx === currentIndex ? 1 : 0,
-              scale: idx === currentIndex ? 1 : 1.1,
+              scale: idx === currentIndex ? 1.1 : 1,
             }}
             transition={{
-              duration: 1.5,
-              ease: [0.22, 1, 0.36, 1],
+              opacity: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: 8, ease: "linear" },
             }}
             className="absolute inset-0"
           >
@@ -116,7 +122,7 @@ export default function ImageSlideshow() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
       >
         <div className="flex items-center gap-3">
           {images.map((_, idx) => (
