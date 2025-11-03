@@ -127,97 +127,25 @@ export default function ImageSlideshow() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-auto"
       >
-        <div className="relative h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-sm">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-          <div className="max-w-7xl mx-auto h-full px-8 flex items-center justify-between">
-            <div className="flex items-center gap-6 pointer-events-auto">
-              <motion.button
-                onClick={prevSlide}
-                className="group relative w-12 h-12 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
-              </motion.button>
-
-              <motion.button
-                onClick={togglePlayPause}
-                className="group relative w-12 h-12 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={isPlaying ? "Pause" : "Play"}
-              >
-                {isPlaying ? (
-                  <Pause className="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
-                ) : (
-                  <Play className="w-4 h-4 text-white/70 group-hover:text-white transition-colors ml-0.5" />
-                )}
-              </motion.button>
-
-              <motion.button
-                onClick={nextSlide}
-                className="group relative w-12 h-12 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" />
-              </motion.button>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 pointer-events-auto">
-              <div className="flex items-center gap-2">
-                {images.map((_, idx) => (
-                  <motion.button
-                    key={idx}
-                    onClick={() => goToSlide(idx)}
-                    className="group relative"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  >
-                    {idx === currentIndex ? (
-                      <div className="relative w-8 h-1.5 rounded-full bg-white/90 shadow-lg shadow-white/20 overflow-hidden">
-                        <motion.div
-                          className="absolute inset-0 bg-white"
-                          initial={{ scaleX: 0 }}
-                          animate={{ scaleX: isPlaying ? 1 : 0 }}
-                          transition={{ duration: 5, ease: "linear" }}
-                          style={{ transformOrigin: "left" }}
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-white/60 transition-all duration-300" />
-                    )}
-                  </motion.button>
-                ))}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2.2, duration: 0.8 }}
-                className="text-white/50 text-[10px] font-light tracking-[0.25em] uppercase tabular-nums"
-              >
-                {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
-              </motion.div>
-            </div>
-
-            <div className="flex items-center gap-8 pointer-events-auto">
-              <div className="text-right">
-                <div className="text-white/40 text-[10px] font-light tracking-[0.2em] uppercase mb-1">
-                  Current View
-                </div>
-                <div className="text-white/90 text-sm font-light tracking-wider">
-                  Gallery {String(currentIndex + 1).padStart(2, '0')}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center gap-3 bg-black/20 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10">
+          {images.map((_, idx) => (
+            <motion.button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              className="group"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Go to slide ${idx + 1}`}
+            >
+              <div className={`transition-all duration-300 rounded-full ${
+                idx === currentIndex
+                  ? 'w-8 h-2 bg-white'
+                  : 'w-2 h-2 bg-white/40 group-hover:bg-white/70'
+              }`} />
+            </motion.button>
+          ))}
         </div>
       </motion.div>
 
@@ -229,7 +157,7 @@ export default function ImageSlideshow() {
           opacity: { delay: 2.5, duration: 1 },
           y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute bottom-40 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors pointer-events-auto"
+        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors pointer-events-auto"
         whileHover={{ scale: 1.2 }}
         aria-label="Scroll down"
       >
