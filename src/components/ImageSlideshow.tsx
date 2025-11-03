@@ -3,23 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 export default function ImageSlideshow() {
-  const images = [
-    'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920',
-    'https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1920',
-    'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=1920',
-    'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1920',
-    'https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1920',
-    'https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=1920',
-  ];
+  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10];
+  const images = imageNumbers.map((num) => `https://bytyvraji.sk/${num}e.jpg`);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
   const nextSlide = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
   const goToSlide = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
   };
 
@@ -42,32 +39,42 @@ export default function ImageSlideshow() {
 
   return (
     <section className="relative h-screen overflow-hidden bg-black">
-      <div className="absolute inset-0">
-        {images.map((image, idx) => (
-          <motion.div
-            key={idx}
-            initial={false}
-            animate={{
-              opacity: idx === currentIndex ? 1 : 0,
-              scale: idx === currentIndex ? 1.1 : 1,
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={currentIndex}
+          custom={direction}
+          initial={{
+            opacity: 0,
+            x: direction > 0 ? '100%' : '-100%',
+            scale: 1,
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            scale: 1.15,
+          }}
+          exit={{
+            opacity: 0,
+            x: direction > 0 ? '-100%' : '100%',
+            scale: 1,
+          }}
+          transition={{
+            x: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.8 },
+            scale: { duration: 6, ease: "linear" },
+          }}
+          className="absolute inset-0"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${images[currentIndex]})`,
             }}
-            transition={{
-              opacity: { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
-              scale: { duration: 8, ease: "linear" },
-            }}
-            className="absolute inset-0"
           >
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url(${image})`,
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70"></div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70"></div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <motion.div
