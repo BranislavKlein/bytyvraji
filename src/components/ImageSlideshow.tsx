@@ -114,24 +114,24 @@ export default function ImageSlideshow() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-auto"
+        className="absolute bottom-6 left-0 right-0 z-20 pointer-events-none px-8"
       >
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-8">
-            <motion.button
-              onClick={() => goToSlide((currentIndex - 1 + images.length) % images.length)}
-              className="text-white/70 hover:text-white transition-colors group"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Previous slide"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-12 h-[1px] bg-white/40 group-hover:bg-white transition-colors"></div>
-                <span className="text-sm font-light tracking-widest uppercase">Prev</span>
-              </div>
-            </motion.button>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <motion.button
+            onClick={() => goToSlide((currentIndex - 1 + images.length) % images.length)}
+            className="text-white/70 hover:text-white transition-colors group pointer-events-auto"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Previous slide"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-12 h-[1px] bg-white/40 group-hover:bg-white transition-colors"></div>
+              <span className="text-sm font-light tracking-widest uppercase">Prev</span>
+            </div>
+          </motion.button>
 
-            <div className="flex items-center gap-3 px-6 py-2">
+          <div className="flex flex-col items-center gap-4 pointer-events-auto">
+            <div className="flex items-center gap-3">
               {images.map((_, idx) => (
                 <motion.button
                   key={idx}
@@ -150,28 +150,28 @@ export default function ImageSlideshow() {
               ))}
             </div>
 
-            <motion.button
-              onClick={() => goToSlide((currentIndex + 1) % images.length)}
-              className="text-white/70 hover:text-white transition-colors group"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Next slide"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.2, duration: 0.8 }}
+              className="text-white/50 text-xs font-light tracking-[0.3em] uppercase"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-light tracking-widest uppercase">Next</span>
-                <div className="w-12 h-[1px] bg-white/40 group-hover:bg-white transition-colors"></div>
-              </div>
-            </motion.button>
+              {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+            </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.2, duration: 0.8 }}
-            className="text-white/50 text-xs font-light tracking-[0.3em] uppercase"
+          <motion.button
+            onClick={() => goToSlide((currentIndex + 1) % images.length)}
+            className="text-white/70 hover:text-white transition-colors group pointer-events-auto"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Next slide"
           >
-            {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
-          </motion.div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-light tracking-widest uppercase">Next</span>
+              <div className="w-12 h-[1px] bg-white/40 group-hover:bg-white transition-colors"></div>
+            </div>
+          </motion.button>
         </div>
       </motion.div>
 
