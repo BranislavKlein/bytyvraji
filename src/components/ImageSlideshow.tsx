@@ -40,12 +40,12 @@ export default function ImageSlideshow() {
         <AnimatePresence initial={false}>
           <motion.div
             key={currentIndex}
-            initial={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 1, opacity: 0 }}
             animate={{ scale: 1.1, opacity: 1 }}
-            exit={{ scale: 1.15, opacity: 0 }}
+            exit={{ scale: 1.2, opacity: 0 }}
             transition={{
               scale: { duration: 5, ease: "linear" },
-              opacity: { duration: 0.5 }
+              opacity: { duration: 1.2, ease: "easeInOut" }
             }}
             className="absolute inset-0"
           >
@@ -114,25 +114,64 @@ export default function ImageSlideshow() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-auto"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-auto"
       >
-        <div className="bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
-          <div className="flex items-center gap-2.5">
-            {images.map((_, idx) => (
-              <motion.button
-                key={idx}
-                onClick={() => goToSlide(idx)}
-                className={`rounded-full transition-all duration-500 ${
-                  idx === currentIndex
-                    ? 'w-10 h-2.5 bg-white shadow-lg shadow-white/50'
-                    : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/60'
-                }`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-8">
+            <motion.button
+              onClick={() => goToSlide((currentIndex - 1 + images.length) % images.length)}
+              className="text-white/70 hover:text-white transition-colors group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Previous slide"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-12 h-[1px] bg-white/40 group-hover:bg-white transition-colors"></div>
+                <span className="text-sm font-light tracking-widest uppercase">Prev</span>
+              </div>
+            </motion.button>
+
+            <div className="flex items-center gap-3 px-6 py-2">
+              {images.map((_, idx) => (
+                <motion.button
+                  key={idx}
+                  onClick={() => goToSlide(idx)}
+                  className="group relative"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label={`Go to slide ${idx + 1}`}
+                >
+                  <div className={`transition-all duration-500 ${
+                    idx === currentIndex
+                      ? 'w-3 h-3 rounded-full bg-white shadow-lg shadow-white/30'
+                      : 'w-2 h-2 rounded-full bg-white/30 group-hover:bg-white/60'
+                  }`} />
+                </motion.button>
+              ))}
+            </div>
+
+            <motion.button
+              onClick={() => goToSlide((currentIndex + 1) % images.length)}
+              className="text-white/70 hover:text-white transition-colors group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Next slide"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-light tracking-widest uppercase">Next</span>
+                <div className="w-12 h-[1px] bg-white/40 group-hover:bg-white transition-colors"></div>
+              </div>
+            </motion.button>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.2, duration: 0.8 }}
+            className="text-white/50 text-xs font-light tracking-[0.3em] uppercase"
+          >
+            {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+          </motion.div>
         </div>
       </motion.div>
 
@@ -144,7 +183,7 @@ export default function ImageSlideshow() {
           opacity: { delay: 2.5, duration: 1 },
           y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors pointer-events-auto"
+        className="absolute bottom-32 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors pointer-events-auto"
         whileHover={{ scale: 1.2 }}
         aria-label="Scroll down"
       >
