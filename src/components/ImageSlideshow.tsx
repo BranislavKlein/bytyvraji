@@ -1,21 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
-
-const slideVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? '100%' : '-100%',
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => ({
-    x: direction > 0 ? '-100%' : '100%',
-    opacity: 0,
-  }),
-};
+import { ChevronDown, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 
 export default function ImageSlideshow() {
   const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10];
@@ -23,44 +8,73 @@ export default function ImageSlideshow() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const progressRef = useRef<NodeJS.Timeout | null>(null);
 
-  const goToSlide = (index: number) => {
+  const goToSlide = useCallback((index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
-    resetAutoplay();
-  };
+    setProgress(0);
+  }, [currentIndex]);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % images.length);
-    resetAutoplay();
-  };
+    setProgress(0);
+  }, [images.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    resetAutoplay();
-  };
+    setProgress(0);
+  }, [images.length]);
 
-  const resetAutoplay = () => {
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current);
-    }
-    autoplayRef.current = setInterval(() => {
-      setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {
-    resetAutoplay();
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+    }
+    if (progressRef.current) {
+      clearInterval(progressRef.current);
+    }
+
+    if (isPlaying) {
+      autoplayRef.current = setInterval(() => {
+        nextSlide();
+      }, 6000);
+
+      progressRef.current = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) return 0;
+          return prev + (100 / 600);
+        });
+      }, 10);
+    }
+
     return () => {
-      if (autoplayRef.current) {
-        clearInterval(autoplayRef.current);
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+      if (progressRef.current) clearInterval(progressRef.current);
+    };
+  }, [isPlaying, nextSlide]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === ' ') {
+        e.preventDefault();
+        togglePlayPause();
       }
     };
-  }, []);
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [nextSlide, prevSlide]);
 
   const scrollToOffer = () => {
     const element = document.getElementById('stats');
@@ -70,18 +84,26 @@ export default function ImageSlideshow() {
   };
 
   return (
-    <section className="relative h-screen overflow-hidden bg-black">
-      <AnimatePresence initial={false} custom={direction} mode="popLayout">
+    <section className="relative h-screen overflow-hidden bg-black group">
+      <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentIndex}
           custom={direction}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
+          initial={{
+            opacity: 0,
+            scale: 1.1,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          exit={{
+            opacity: 0,
+            scale: 0.95,
+          }}
           transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
-            opacity: { duration: 0.3 },
+            duration: 1.2,
+            ease: [0.43, 0.13, 0.23, 0.96],
           }}
           className="absolute inset-0"
         >
@@ -91,80 +113,134 @@ export default function ImageSlideshow() {
               backgroundImage: `url(${images[currentIndex]})`,
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
           </div>
         </motion.div>
       </AnimatePresence>
 
-      <button
+      <motion.button
         onClick={prevSlide}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 text-white/70 hover:text-white transition-all hover:scale-110 bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full p-2 md:p-3"
+        className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 z-30 text-white/60 hover:text-white transition-all duration-300 bg-black/10 hover:bg-black/30 backdrop-blur-md rounded-full p-3 md:p-4 border border-white/10 hover:border-white/30 opacity-0 group-hover:opacity-100"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         aria-label="Previous slide"
       >
-        <ChevronLeft size={32} strokeWidth={2} />
-      </button>
+        <ChevronLeft size={28} strokeWidth={1.5} />
+      </motion.button>
 
-      <button
+      <motion.button
         onClick={nextSlide}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 text-white/70 hover:text-white transition-all hover:scale-110 bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full p-2 md:p-3"
+        className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 z-30 text-white/60 hover:text-white transition-all duration-300 bg-black/10 hover:bg-black/30 backdrop-blur-md rounded-full p-3 md:p-4 border border-white/10 hover:border-white/30 opacity-0 group-hover:opacity-100"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         aria-label="Next slide"
       >
-        <ChevronRight size={32} strokeWidth={2} />
-      </button>
+        <ChevronRight size={28} strokeWidth={1.5} />
+      </motion.button>
 
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="text-center text-white px-4 max-w-5xl mx-auto"
+          transition={{ duration: 1.2, delay: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
+          className="text-center text-white px-6 max-w-6xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="mb-8"
+          >
+            <div className="h-px w-16 bg-white/40 mx-auto mb-8"></div>
+          </motion.div>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light mb-8 tracking-wider drop-shadow-2xl">
             Byty v Raji
           </h1>
-          <p className="text-xl md:text-3xl font-light mb-4 tracking-wide drop-shadow-lg">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="text-xl md:text-2xl lg:text-3xl font-extralight mb-6 tracking-widest uppercase drop-shadow-lg opacity-80"
+          >
             Bytový dom
-          </p>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed opacity-90 drop-shadow-lg">
-            Nadštandardné bývanie v modernom bytovom dome v unikátnej prírode
-          </p>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
+          >
+            <div className="h-px w-24 bg-white/30 mx-auto mb-8"></div>
+            <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed font-light opacity-75 drop-shadow-lg">
+              Nadštandardné bývanie v modernom bytovom dome v unikátnej prírode
+            </p>
+          </motion.div>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-        {images.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => goToSlide(idx)}
-            className={`relative overflow-hidden rounded-full transition-all duration-500 ${
-              idx === currentIndex
-                ? 'w-12 h-3 bg-white shadow-lg shadow-white/50'
-                : 'w-3 h-3 bg-white/40 hover:bg-white/70 hover:scale-110'
-            }`}
-            aria-label={`Go to slide ${idx + 1}`}
-          >
-            {idx === currentIndex && (
-              <motion.div
-                layoutId="activeSlide"
-                className="absolute inset-0 bg-white rounded-full"
-                transition={{
-                  type: 'spring',
-                  stiffness: 380,
-                  damping: 30,
-                }}
-              />
-            )}
-          </button>
-        ))}
+      <div className="absolute top-8 right-8 z-30 flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <motion.button
+          onClick={togglePlayPause}
+          className="text-white/60 hover:text-white transition-all bg-black/10 hover:bg-black/30 backdrop-blur-md rounded-full p-3 border border-white/10 hover:border-white/30"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
+        >
+          {isPlaying ? <Pause size={20} strokeWidth={1.5} /> : <Play size={20} strokeWidth={1.5} />}
+        </motion.button>
+        <div className="text-white/60 text-sm font-light backdrop-blur-md bg-black/10 px-4 py-2 rounded-full border border-white/10">
+          {currentIndex + 1} / {images.length}
+        </div>
       </div>
 
-      <button
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20">
+        <div className="flex items-center gap-2 bg-black/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/10">
+          {images.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              className="relative group"
+              aria-label={`Go to slide ${idx + 1}`}
+            >
+              <div
+                className={`transition-all duration-500 rounded-full ${
+                  idx === currentIndex
+                    ? 'w-8 h-1.5 bg-white'
+                    : 'w-1.5 h-1.5 bg-white/30 group-hover:bg-white/60 group-hover:scale-150'
+                }`}
+              >
+                {idx === currentIndex && (
+                  <motion.div
+                    className="absolute inset-0 bg-white rounded-full overflow-hidden"
+                    initial={{ width: 0 }}
+                  >
+                    <motion.div
+                      className="h-full bg-white/50"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </motion.div>
+                )}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <motion.button
         onClick={scrollToOffer}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white animate-bounce hover:scale-110 transition-transform z-20"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/50 hover:text-white z-20 transition-colors"
+        animate={{
+          y: [0, 10, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        whileHover={{ scale: 1.2 }}
         aria-label="Scroll down"
       >
-        <ChevronDown size={48} strokeWidth={1.5} />
-      </button>
+        <ChevronDown size={40} strokeWidth={1} />
+      </motion.button>
     </section>
   );
 }
