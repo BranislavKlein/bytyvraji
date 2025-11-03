@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Compass, FileText, Building2, CheckCircle2, Key } from "lucide-react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import ImageSlideshow from "../components/ImageSlideshow";
 
 
 /* ----------------------- Helpers pre animácie bez knižníc ----------------------- */
@@ -125,52 +126,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-50 to-stone-100">
-      
-      
-      
-      {/* HERO */}
-    <section className="relative h-screen flex items-center overflow-hidden font-['Outfit'] text-white">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-1000"
-        style={{
-          backgroundImage:
-            "url(https://bytyvraji.sk/4e.jpg)",
-        }}
-      >
-        {/* Subtle overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/40"></div>
-      </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex justify-center md:justify-start">
-        <motion.div
-          className="text-center md:text-left max-w-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-tight mb-4 drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)]">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-amber-300">
-              Byty v&nbsp;Raji
-            </span>
-          </h1>
-
-          <p className="text-lg md:text-2xl font-light uppercase tracking-[0.25em] text-white/80 mb-10">
-            Bytový dom
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="group flex items-center gap-2 mx-auto md:mx-0 bg-white/10 hover:bg-white/20 backdrop-blur-md px-8 py-3 rounded-full font-medium tracking-wide text-white transition-all border border-white/30"
-          >
-            Viac informácií
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
-        </motion.div>
-      </div>
-    </section>
+      <ImageSlideshow />
 
 
 
