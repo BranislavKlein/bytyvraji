@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import ImageSlideshow from "../components/ImageSlideshow";
 import ProjectHighlights from "../components/ProjectHighlights";
+import ContactCTA from "../components/ContactCTA";
 
 
 /* ----------------------- Helpers pre animácie bez knižníc ----------------------- */
@@ -212,74 +213,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* INFO BLOK */}
-      <section className="py-24 bg-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-5xl font-light text-stone-800 mb-6 tracking-wide">Moderné bývanie v Slovenskom Raji</h2>
-              <div className="h-1 w-24 bg-amber-600 mb-8"></div>
-
-              {/* Aktualizovaný text podľa zadania */}
-              <p className="text-lg text-stone-600 leading-relaxed mb-6 font-light">
-                Bytový dom <span className="font-medium text-stone-800">RAJ</span> ponúka 39 bytov s rozlohou od 35 do 90&nbsp;m²,
-                každý s vlastnou terasou alebo balkónom, pivničnou kobkou a vyhradeným parkovacím miestom. To všetko
-                v uzavretom areáli, ktorý poskytuje súkromie, bezpečnosť a pohodlie.
-              </p>
-
-              {/* "Niečo naviac" – stručný výber benefitov */}
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Podlahové vykurovanie a príprava na chladenie",
-                  "Veľkoformátové okná pre maximum denného svetla",
-                  
-                  "Elektronická brána a kamerový systém v areáli",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 text-amber-600" />
-                    <span className="text-stone-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href="#kontakt"
-                  className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-white shadow-sm transition hover:bg-amber-700"
-                >
-                  Mám záujem
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#ponuka"
-                  className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white px-6 py-3 text-stone-800 hover:border-amber-600"
-                >
-                  Pozrieť ponuku bytov
-                </a>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-              <div className="bg-white p-8 border border-stone-300 hover:border-amber-600 transition-colors">
-                <div className="text-4xl font-light text-amber-600 mb-3">A+</div>
-                <div className="text-sm text-stone-700 font-light">Energetická trieda</div>
-              </div>
-              <div className="bg-white p-8 border border-stone-300 hover:border-amber-600 transition-colors">
-                <div className="text-4xl font-light text-amber-600 mb-3">3</div>
-                <div className="text-sm text-stone-700 font-light">Poschodia</div>
-              </div>
-              <div className="bg-white p-8 border border-stone-300 hover:border-amber-600 transition-colors">
-                <div className="text-4xl font-light text-amber-600 mb-3">2026</div>
-                <div className="text-sm text-stone-700 font-light">Rok dokončenia</div>
-              </div>
-              <div className="bg-white p-8 border border-stone-300 hover:border-amber-600 transition-colors">
-                <div className="text-4xl font-light text-amber-600 mb-3">100%</div>
-                <div className="text-sm text-stone-700 font-light">Kvalita</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactCTA />
     </div>
   );
 }
