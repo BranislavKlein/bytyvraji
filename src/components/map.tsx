@@ -53,7 +53,7 @@ export default function OsMap({
 
   return (
     <div style={{ width: "100%", height, borderRadius: 12, overflow: "hidden", boxShadow: "0 6px 24px rgba(0,0,0,.08)" }}>
-      <MapContainer center={[lat, lng]} zoom={zoom} style={{ width: "100%", height: "100%" }} scrollWheelZoom>
+      <MapContainer center={[lat, lng]} zoom={zoom} style={{ width: "100%", height: "100%" }} scrollWheelZoom={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> prispievatelia'
