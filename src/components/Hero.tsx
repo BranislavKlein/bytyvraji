@@ -1,4 +1,5 @@
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const scrollToOffer = () => {
@@ -26,9 +27,25 @@ export default function Hero() {
         <p className="text-xl md:text-3xl font-light mb-4 tracking-wide">
           Bytový dom
         </p>
-        <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed opacity-90">
+        <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed opacity-90 mb-12">
           Nadštandardné bývanie v modernom bytovom dome v unikátnej prírode
         </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            to="/o-projekte"
+            className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full font-medium text-lg shadow-lg transition-all hover:shadow-xl hover:scale-105"
+          >
+            Viac o projekte
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+          <Link
+            to="/ponuka"
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white text-white px-8 py-4 rounded-full font-medium text-lg transition-all hover:scale-105"
+          >
+            Pozrieť byty
+          </Link>
+        </div>
       </div>
 
       <button
