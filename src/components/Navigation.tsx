@@ -51,19 +51,19 @@ export default function Navigation() {
           : 'bg-white shadow-lg border-b border-stone-100'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className={`relative p-2 rounded-lg transition-all duration-300 ${
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+            <div className={`relative p-1.5 sm:p-2 rounded-lg transition-all duration-300 ${
               shouldBeTransparent
                 ? 'bg-white/20 group-hover:bg-white/30'
                 : 'bg-amber-50 group-hover:bg-amber-100'
             }`}>
-              <Building2 className={`w-5 h-5 transition-all duration-300 ${
+              <Building2 className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${
                 shouldBeTransparent ? 'text-white' : 'text-amber-600'
               }`} strokeWidth={1.5} />
             </div>
-            <h1 className={`text-lg font-light tracking-[0.25em] transition-all duration-300 ${
+            <h1 className={`text-sm sm:text-base lg:text-lg font-light tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-300 ${
               shouldBeTransparent ? 'text-white' : 'text-stone-900'
             }`}>
               BYTY V RAJI
@@ -138,10 +138,10 @@ export default function Navigation() {
       >
         <div className={`border-t ${
           shouldBeTransparent
-            ? 'bg-black/80 border-white/20'
+            ? 'bg-black/95 backdrop-blur-lg border-white/20'
             : 'bg-white border-stone-200'
         }`}>
-          <div className="py-2">
+          <div className="py-1">
             <Link
               to="/podorys"
               className={mobileLinkClass('/podorys')}
