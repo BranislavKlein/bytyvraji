@@ -67,8 +67,8 @@ export default function Contact() {
                   <div>
                     <h4 className="font-light text-stone-900 mb-1">Adresa</h4>
                     <p className="text-stone-600 font-light">
-                      Byty v Raji<br />
-                      Slovenská republika
+                      Námestie svätého Egídia 95<br />
+                      058 01 Poprad
                     </p>
                   </div>
                 </div>
@@ -79,7 +79,9 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-light text-stone-900 mb-1">Telefón</h4>
-                    <p className="text-stone-600 font-light">+421 XXX XXX XXX</p>
+                    <a href="tel:+421948527246" className="text-stone-600 font-light hover:text-amber-600 transition-colors">
+                      +421 948 527 246
+                    </a>
                   </div>
                 </div>
 
@@ -89,7 +91,9 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-light text-stone-900 mb-1">Email</h4>
-                    <p className="text-stone-600 font-light">info</p>
+                    <a href="mailto:michaela.schutz@centrumreal.sk" className="text-stone-600 font-light hover:text-amber-600 transition-colors">
+                      michaela.schutz@centrumreal.sk
+                    </a>
                   </div>
                 </div>
               </div>
