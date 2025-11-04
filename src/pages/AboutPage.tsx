@@ -1,5 +1,4 @@
 import About from '../components/About';
-import Map from '../components/map';
 
 export default function AboutPage() {
   return (
@@ -10,8 +9,6 @@ export default function AboutPage() {
       }}
     >
       <About />
-     <Map />
-
     </div>
   );
 }

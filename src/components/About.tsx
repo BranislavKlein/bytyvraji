@@ -197,7 +197,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="h-[300px] sm:h-[350px] lg:h-[400px]">
+            <div className="h-[300px] sm:h-[350px] lg:h-[400px] relative z-0">
               <OsMap
                 height={300}
                 title="Bytový dom RAJ"
