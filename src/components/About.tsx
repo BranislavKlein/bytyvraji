@@ -10,7 +10,7 @@ export default function About() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
-    <section id="about" className="bg-gradient-to-b from-white to-stone-50">
+    <section id="about" className="bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
