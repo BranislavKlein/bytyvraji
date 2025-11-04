@@ -63,18 +63,11 @@ export default function Navigation() {
                 shouldBeTransparent ? 'text-white' : 'text-amber-600'
               }`} strokeWidth={1.5} />
             </div>
-            <div className="flex flex-col">
-              <h1 className={`text-lg font-light tracking-[0.25em] transition-all duration-300 ${
-                shouldBeTransparent ? 'text-white' : 'text-stone-900'
-              }`}>
-                BYTY V RAJI
-              </h1>
-              <span className={`text-[10px] tracking-[0.2em] uppercase font-light transition-all duration-300 ${
-                shouldBeTransparent ? 'text-white/80' : 'text-stone-500'
-              }`}>
-                Apartmány Vraje
-              </span>
-            </div>
+            <h1 className={`text-lg font-light tracking-[0.25em] transition-all duration-300 ${
+              shouldBeTransparent ? 'text-white' : 'text-stone-900'
+            }`}>
+              BYTY V RAJI
+            </h1>
           </Link>
 
           <div className="hidden md:block">
