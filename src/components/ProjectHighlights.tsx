@@ -1,34 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Home, MapPin, Calendar, Award, Building2, TreePine } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 
 export default function ProjectHighlights() {
-  const highlights = [
-    {
-      icon: Home,
-      value: '39',
-      label: 'bytov',
-      description: 'od 40 do 90 m²'
-    },
-    {
-      icon: Building2,
-      value: '5',
-      label: 'mezonetov',
-      description: 'priestranné bývanie'
-    },
-    {
-      icon: Calendar,
-      value: 'Apríl 2026',
-      label: 'dokončenie',
-      description: 'rezervácie spustené'
-    },
-    {
-      icon: TreePine,
-      value: 'Národný park',
-      label: 'Slovenský Raj',
-      description: 'unikátna lokalita'
-    }
-  ];
 
   return (
     <section className="relative py-24 bg-gradient-to-b from-white via-stone-50 to-white overflow-hidden">
@@ -40,56 +14,6 @@ export default function ProjectHighlights() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-amber-100 px-5 py-2 rounded-full mb-6">
-            <Award className="w-4 h-4 text-amber-700" />
-            <span className="text-xs font-semibold text-amber-900 tracking-wide uppercase">Prémiový projekt</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-light text-stone-900 mb-4 tracking-tight">
-            Bytový dom RAJ
-          </h2>
-          <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-            Moderný rezidenčný projekt v srdci národného parku Slovenský Raj
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {highlights.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative bg-white rounded-xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-stone-100"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-
-                <div className="relative">
-                  <div className="w-14 h-14 bg-amber-100 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-7 h-7 text-amber-700" />
-                  </div>
-
-                  <div className="mb-2">
-                    <div className="text-3xl font-light text-stone-900 mb-1">{item.value}</div>
-                    <div className="text-sm font-medium text-stone-700 uppercase tracking-wider">{item.label}</div>
-                  </div>
-
-                  <div className="text-xs text-stone-500 leading-relaxed">{item.description}</div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
