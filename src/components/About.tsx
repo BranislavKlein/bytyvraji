@@ -38,7 +38,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl mb-4">
+          <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl mb-6">
             <motion.img
               key={currentImageIndex}
               initial={{ opacity: 0 }}
@@ -48,35 +48,49 @@ export default function About() {
               alt="Bytový dom RAJ"
               className="w-full h-full object-cover"
             />
+
+            <button
+              onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+              aria-label="Previous image"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-stone-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              onClick={() => setCurrentImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+              aria-label="Next image"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-stone-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">
+              <span className="text-white text-sm font-medium">{currentImageIndex + 1} / {galleryImages.length}</span>
+            </div>
           </div>
 
-          <div className="flex justify-center gap-2 mb-4">
-            {galleryImages.map((_, idx) => (
+          <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-2">
+            {galleryImages.map((img, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentImageIndex(idx)}
-                className={`h-1.5 rounded-full transition-all ${
+                className={`aspect-video overflow-hidden rounded-md cursor-pointer transition-all ${
                   idx === currentImageIndex
-                    ? 'w-8 bg-amber-600'
-                    : 'w-1.5 bg-stone-300 hover:bg-stone-400'
+                    ? 'ring-4 ring-amber-600 shadow-lg'
+                    : 'hover:ring-2 hover:ring-amber-400 opacity-70 hover:opacity-100'
                 }`}
-              />
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {galleryImages.slice(1, 5).map((img, idx) => (
-              <div
-                key={idx}
-                className="aspect-video overflow-hidden rounded-md cursor-pointer group shadow-md hover:shadow-xl transition-shadow"
-                onClick={() => setCurrentImageIndex(idx + 1)}
               >
                 <img
                   src={img}
-                  alt=""
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt={`Náhľad ${idx + 1}`}
+                  className="w-full h-full object-cover"
                 />
-              </div>
+              </button>
             ))}
           </div>
         </motion.div>
