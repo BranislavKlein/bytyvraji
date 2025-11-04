@@ -4,61 +4,61 @@ import { Calendar, Mail, Phone, ArrowRight } from 'lucide-react';
 
 export default function ContactCTA() {
   return (
-    <section className="py-24 bg-stone-100">
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 rounded-3xl overflow-hidden shadow-2xl"
+          className="relative bg-gradient-to-br from-amber-50 via-white to-amber-50 rounded-3xl overflow-hidden shadow-2xl border border-amber-100"
         >
-          <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 opacity-[0.03]">
             <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 2px 2px, rgb(217 119 6) 1px, transparent 0)`,
               backgroundSize: '32px 32px'
             }}></div>
           </div>
 
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-600/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl"></div>
 
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-12 md:p-16">
             <div>
-              <div className="inline-flex items-center gap-2 bg-amber-600/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-                <Calendar className="w-4 h-4 text-amber-400" />
-                <span className="text-xs font-semibold text-amber-300 tracking-wide uppercase">Obhliadka</span>
+              <div className="inline-flex items-center gap-2 bg-amber-600 px-4 py-2 rounded-full mb-6">
+                <Calendar className="w-4 h-4 text-white" />
+                <span className="text-xs font-semibold text-white tracking-wide uppercase">Obhliadka</span>
               </div>
 
-              <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight leading-tight">
+              <h2 className="text-4xl md:text-5xl font-light text-stone-900 mb-6 tracking-tight leading-tight">
                 Naplánujte si osobnú obhliadku
               </h2>
 
-              <p className="text-lg text-stone-300 leading-relaxed mb-8">
+              <p className="text-lg text-stone-600 leading-relaxed mb-8">
                 Radi vám priblížime všetky detaily projektu a odpovieme na vaše otázky.
                 Zistite viac o dostupných bytoch a možnostiach financovania.
               </p>
 
               <div className="space-y-4 mb-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-amber-600/20 rounded-full flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-amber-400" />
+                  <div className="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-stone-400 mb-1">Zavolajte nám</div>
-                    <a href="tel:+421123456789" className="text-white hover:text-amber-400 transition-colors font-medium">
+                    <div className="text-sm text-stone-500 mb-1">Zavolajte nám</div>
+                    <a href="tel:+421123456789" className="text-stone-900 hover:text-amber-600 transition-colors font-medium">
                       +421 123 456 789
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-amber-600/20 rounded-full flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-amber-400" />
+                  <div className="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-stone-400 mb-1">Napíšte nám</div>
-                    <a href="mailto:info@bytyvraji.sk" className="text-white hover:text-amber-400 transition-colors font-medium">
+                    <div className="text-sm text-stone-500 mb-1">Napíšte nám</div>
+                    <a href="mailto:info@bytyvraji.sk" className="text-stone-900 hover:text-amber-600 transition-colors font-medium">
                       info@bytyvraji.sk
                     </a>
                   </div>
@@ -81,15 +81,15 @@ export default function ContactCTA() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+                  className="bg-white backdrop-blur-sm border border-amber-200 rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Calendar className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium text-white mb-2">Flexibilný termín</h3>
-                      <p className="text-stone-300 text-sm leading-relaxed">
+                      <h3 className="text-xl font-medium text-stone-900 mb-2">Flexibilný termín</h3>
+                      <p className="text-stone-600 text-sm leading-relaxed">
                         Prispôsobíme sa vášmu času. Obhliadky realizujeme aj cez víkend.
                       </p>
                     </div>
@@ -101,15 +101,15 @@ export default function ContactCTA() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+                  className="bg-white backdrop-blur-sm border border-amber-200 rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Building2 className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium text-white mb-2">Odborné poradenstvo</h3>
-                      <p className="text-stone-300 text-sm leading-relaxed">
+                      <h3 className="text-xl font-medium text-stone-900 mb-2">Odborné poradenstvo</h3>
+                      <p className="text-stone-600 text-sm leading-relaxed">
                         Pomôžeme vám vybrať ideálny byt a poradíme s financovaním.
                       </p>
                     </div>
@@ -121,15 +121,15 @@ export default function ContactCTA() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.4 }}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+                  className="bg-white backdrop-blur-sm border border-amber-200 rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-medium text-white mb-2">Lokalita</h3>
-                      <p className="text-stone-300 text-sm leading-relaxed">
+                      <h3 className="text-xl font-medium text-stone-900 mb-2">Lokalita</h3>
+                      <p className="text-stone-600 text-sm leading-relaxed">
                         Ukážeme vám okolie a priblížime výhody bývania v Slovenskom Raji.
                       </p>
                     </div>
