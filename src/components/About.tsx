@@ -68,10 +68,6 @@ export default function About() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">
-              <span className="text-white text-sm font-medium">{currentImageIndex + 1} / {galleryImages.length}</span>
-            </div>
           </div>
 
           <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-2">
