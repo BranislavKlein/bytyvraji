@@ -5,6 +5,7 @@ import { Compass, FileText, Building2, CheckCircle2, Key } from "lucide-react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import ImageSlideshow from "../components/ImageSlideshow";
+import ProjectHighlights from "../components/ProjectHighlights";
 
 
 /* ----------------------- Helpers pre animácie bez knižníc ----------------------- */
@@ -128,6 +129,8 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-stone-50 to-stone-100">
 
       <ImageSlideshow />
+
+      <ProjectHighlights />
 
 
 
