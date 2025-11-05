@@ -51,9 +51,9 @@ export default function About() {
           <div className="relative h-[250px] sm:h-[350px] lg:h-[400px] rounded-lg overflow-hidden shadow-xl mb-4 sm:mb-6">
             <motion.img
               key={currentImageIndex}
-              initial={{ opacity: 0, scale: 1 }}
-              animate={{ opacity: 1, scale: 1.1 }}
-              transition={{ duration: 8, ease: "linear" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
               src={galleryImages[currentImageIndex]}
               alt="Bytový dom RAJ"
               className="w-full h-full object-cover"
