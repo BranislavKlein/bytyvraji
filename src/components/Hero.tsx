@@ -14,7 +14,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-zoom"
         style={{
-          backgroundImage: 'url(https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920)',
+          backgroundImage: 'url(https://bytyvraji.sk/up_cingov.png)',
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60"></div>
@@ -40,10 +40,10 @@ export default function Hero() {
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </Link>
           <Link
-            to="/ponuka"
+            to="/podorys"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-base sm:text-lg transition-all hover:scale-105"
           >
-            Pozrieť byty
+            Zobraziť ponuku bytov
           </Link>
         </div>
       </div>

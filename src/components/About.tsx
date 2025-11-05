@@ -4,8 +4,18 @@ import { useState } from 'react';
 import OsMap from './map';
 
 export default function About() {
-  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10];
-  const galleryImages = imageNumbers.map((num) => `https://bytyvraji.sk/${num}e.jpg`);
+  const galleryImages = [
+    'https://bytyvraji.sk/up_cingov.png',
+    'https://bytyvraji.sk/1e.jpg',
+    'https://bytyvraji.sk/2e.jpg',
+    'https://bytyvraji.sk/3e.jpg',
+    'https://bytyvraji.sk/4e.jpg',
+    'https://bytyvraji.sk/5e.jpg',
+    'https://bytyvraji.sk/6e.jpg',
+    'https://bytyvraji.sk/7e.jpg',
+    'https://bytyvraji.sk/8e.jpg',
+    'https://bytyvraji.sk/10e.jpg'
+  ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

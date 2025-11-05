@@ -9,12 +9,18 @@ interface GalleryImage {
 }
 
 export default function Gallery() {
-  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10];
-  const images: GalleryImage[] = imageNumbers.map((num) => ({
-    id: num,
-    image_url: `https://bytyvraji.sk/${num}e.jpg`,
-    title: `Apartmánový dom Vraje ${num}`,
-  }));
+  const images: GalleryImage[] = [
+    { id: 0, image_url: 'https://bytyvraji.sk/up_cingov.png', title: 'Apartmánový dom Vraje - Okolie' },
+    { id: 1, image_url: 'https://bytyvraji.sk/1e.jpg', title: 'Apartmánový dom Vraje 1' },
+    { id: 2, image_url: 'https://bytyvraji.sk/2e.jpg', title: 'Apartmánový dom Vraje 2' },
+    { id: 3, image_url: 'https://bytyvraji.sk/3e.jpg', title: 'Apartmánový dom Vraje 3' },
+    { id: 4, image_url: 'https://bytyvraji.sk/4e.jpg', title: 'Apartmánový dom Vraje 4' },
+    { id: 5, image_url: 'https://bytyvraji.sk/5e.jpg', title: 'Apartmánový dom Vraje 5' },
+    { id: 6, image_url: 'https://bytyvraji.sk/6e.jpg', title: 'Apartmánový dom Vraje 6' },
+    { id: 7, image_url: 'https://bytyvraji.sk/7e.jpg', title: 'Apartmánový dom Vraje 7' },
+    { id: 8, image_url: 'https://bytyvraji.sk/8e.jpg', title: 'Apartmánový dom Vraje 8' },
+    { id: 10, image_url: 'https://bytyvraji.sk/10e.jpg', title: 'Apartmánový dom Vraje 10' },
+  ];
 
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
