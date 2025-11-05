@@ -50,7 +50,7 @@ export default function ImageSlideshow() {
   return (
     <section className="relative h-screen overflow-hidden bg-black">
       <div className="absolute inset-0">
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} mode="sync">
           <motion.div
             key={currentIndex}
             initial={{ scale: 1, opacity: 0 }}

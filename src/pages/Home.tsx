@@ -119,7 +119,7 @@ function StatCard({ value, label, numberGradient }: { value: number; label: stri
 /* ----------------------- HLAVNÝ KOMPONENT STRÁNKY ----------------------- */
 export default function Home() {
   const timelineSteps = [
-    { id: 1, date: "09/2019", title: "Začiatok projektu", icon: Compass, status: "completed" },
+    { id: 1, date: "09/2022", title: "Začiatok projektu", icon: Compass, status: "completed" },
     { id: 2, date: "05/2025", title: "Stavebné povolenie", icon: FileText, status: "completed" },
     { id: 3, date: "09/2025", title: "Výstavba a predaj bytov", icon: Building2, status: "active" },
     { id: 4, date: "05/2026", title: "Dokončenie stavby", icon: CheckCircle2, status: "upcoming" },

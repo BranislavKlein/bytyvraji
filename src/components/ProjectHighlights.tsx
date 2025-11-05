@@ -35,6 +35,10 @@ export default function ProjectHighlights() {
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                 <div className="flex items-start gap-2 sm:gap-3">
                   <div className="w-1.5 h-1.5 bg-amber-600 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
+                  <p className="text-xs sm:text-sm text-stone-600">39 bytov</p>
+                </div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-1.5 h-1.5 bg-amber-600 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                   <p className="text-xs sm:text-sm text-stone-600">Podlahové kúrenie a príprava na klimatizáciu</p>
                 </div>
                 <div className="flex items-start gap-2 sm:gap-3">
@@ -48,6 +52,10 @@ export default function ProjectHighlights() {
                 <div className="flex items-start gap-2 sm:gap-3">
                   <div className="w-1.5 h-1.5 bg-amber-600 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                   <p className="text-xs sm:text-sm text-stone-600">Elektronická brána a kamerový systém</p>
+                </div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-1.5 h-1.5 bg-amber-600 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
+                  <p className="text-xs sm:text-sm text-stone-600">Vlastný sklad ku každému bytu</p>
                 </div>
               </div>
 
@@ -72,9 +80,9 @@ export default function ProjectHighlights() {
                 </div>
 
                 <div className="bg-gradient-to-br from-stone-800 to-stone-900 rounded-xl p-4 sm:p-6 lg:p-8 text-white shadow-lg">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light mb-2 sm:mb-3">A+</div>
-                  <div className="text-xs sm:text-sm opacity-90 mb-0.5 sm:mb-1">trieda</div>
-                  <div className="text-[10px] sm:text-xs opacity-75">Energetická</div>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-light mb-2 sm:mb-3">39</div>
+                  <div className="text-xs sm:text-sm opacity-90 mb-0.5 sm:mb-1">bytov</div>
+                  <div className="text-[10px] sm:text-xs opacity-75">v projekte</div>
                 </div>
 
                 <div className="bg-white border-2 border-amber-200 rounded-xl p-4 sm:p-6 lg:p-8 shadow-md">

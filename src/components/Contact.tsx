@@ -101,11 +101,18 @@ export default function Contact() {
 
             <div className="bg-stone-50 border border-stone-200 p-6 sm:p-8">
               <h3 className="text-lg sm:text-xl font-light text-stone-900 mb-3 sm:mb-4">Kancelária</h3>
-              <p className="text-sm sm:text-base text-stone-600 mb-3 sm:mb-4 font-light">
+              <p className="text-sm sm:text-base text-stone-600 mb-4 sm:mb-6 font-light">
                 Pondelok - Piatok: 9:00 - 17:00<br />
                 Sobota: 10:00 - 14:00<br />
                 Nedeľa: Zatvorené
               </p>
+              <div className="flex items-center justify-center pt-4 border-t border-stone-200">
+                <img
+                  src="https://bytyvraji.sk/centrum_real.png"
+                  alt="Centrum Real"
+                  className="h-12 sm:h-16 w-auto object-contain"
+                />
+              </div>
             </div>
           </div>
 
