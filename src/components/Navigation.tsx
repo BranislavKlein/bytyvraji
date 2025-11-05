@@ -54,14 +54,16 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           <Link to="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
-            <div className={`relative p-1.5 sm:p-2 rounded-lg transition-all duration-300 ${
+            <div className={`relative p-2 sm:p-2.5 rounded-lg transition-all duration-300 ${
               shouldBeTransparent
-                ? 'bg-white/20 group-hover:bg-white/30'
-                : 'bg-amber-50 group-hover:bg-amber-100'
+                ? 'bg-white/95 group-hover:bg-white'
+                : 'bg-white group-hover:bg-stone-50 border border-stone-200'
             }`}>
-              <Building2 className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${
-                shouldBeTransparent ? 'text-white' : 'text-amber-600'
-              }`} strokeWidth={1.5} />
+              <img
+                src="https://bytyvraji.sk/centrum_real.png"
+                alt="Centrum Real"
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <h1 className={`text-sm sm:text-base lg:text-lg font-light tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-300 ${
@@ -69,18 +71,11 @@ export default function Navigation() {
               }`}>
                 BYTY V RAJI
               </h1>
-              <div className="flex items-center gap-2">
-                <span className={`text-[10px] sm:text-xs font-light tracking-wider transition-all duration-300 ${
-                  shouldBeTransparent ? 'text-white/80' : 'text-stone-600'
-                }`}>
-                  Centrum Real
-                </span>
-                <img
-                  src="https://bytyvraji.sk/centrum_real.png"
-                  alt="Centrum Real"
-                  className="h-3 sm:h-4 w-auto object-contain"
-                />
-              </div>
+              <span className={`text-[10px] sm:text-xs font-light tracking-wider transition-all duration-300 ${
+                shouldBeTransparent ? 'text-white/80' : 'text-stone-600'
+              }`}>
+                Centrum Real
+              </span>
             </div>
           </Link>
 
