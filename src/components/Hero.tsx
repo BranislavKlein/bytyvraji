@@ -43,7 +43,7 @@ export default function Hero() {
             to="/podorys"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-base sm:text-lg transition-all hover:scale-105"
           >
-            Zobraziť ponuku bytov
+            Pôdorysy a ceny
           </Link>
         </div>
       </div>

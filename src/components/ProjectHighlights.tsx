@@ -120,7 +120,7 @@ export default function ProjectHighlights() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <Link
-              to="/ponuka"
+              to="/podorys"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-sm sm:text-base lg:text-lg shadow-lg transition-all hover:shadow-xl hover:scale-105"
             >
               Zobraziť ponuku bytov
@@ -128,7 +128,7 @@ export default function ProjectHighlights() {
             </Link>
 
             <Link
-              to="/podorysy"
+              to="/podorys"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-sm sm:text-base lg:text-lg transition-all hover:scale-105"
             >
               Pôdorysy a ceny

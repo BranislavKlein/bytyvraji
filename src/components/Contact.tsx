@@ -107,11 +107,13 @@ export default function Contact() {
                 Nedeľa: Zatvorené
               </p>
               <div className="flex items-center justify-center pt-4 border-t border-stone-200">
-                <img
-                  src="https://bytyvraji.sk/centrum_real.png"
-                  alt="Centrum Real"
-                  className="h-12 sm:h-16 w-auto object-contain"
-                />
+                <div className="bg-stone-900 px-8 py-6 rounded-lg shadow-lg">
+                  <img
+                    src="https://bytyvraji.sk/centrum_real.png"
+                    alt="Centrum Real"
+                    className="h-12 sm:h-16 w-auto object-contain"
+                  />
+                </div>
               </div>
             </div>
           </div>

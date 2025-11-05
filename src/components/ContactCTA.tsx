@@ -45,9 +45,8 @@ export default function ContactCTA() {
                     <Phone className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-stone-500 mb-1">Zavolajte nám</div>
-                    <a href="tel:+421123456789" className="text-stone-900 hover:text-amber-600 transition-colors font-medium">
-                      +421 123 456 789
+                    <a href="tel:+421948527246" className="text-stone-900 hover:text-amber-600 transition-colors font-medium text-lg">
+                      +421 948 527 246
                     </a>
                   </div>
                 </div>
@@ -57,9 +56,8 @@ export default function ContactCTA() {
                     <Mail className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-stone-500 mb-1">Napíšte nám</div>
-                    <a href="mailto:info@bytyvraji.sk" className="text-stone-900 hover:text-amber-600 transition-colors font-medium">
-                      info@bytyvraji.sk
+                    <a href="mailto:michaela.schutz@centrumreal.sk" className="text-stone-900 hover:text-amber-600 transition-colors font-medium text-lg break-all">
+                      michaela.schutz@centrumreal.sk
                     </a>
                   </div>
                 </div>
