@@ -106,14 +106,10 @@ export default function Contact() {
                 Sobota: 10:00 - 14:00<br />
                 Nedeľa: Zatvorené
               </p>
-              <div className="flex items-center justify-center pt-4 border-t border-stone-200">
-                <div className="bg-stone-900 px-8 py-6 rounded-lg shadow-lg">
-                  <img
-                    src="https://bytyvraji.sk/centrum_real.png"
-                    alt="Centrum Real"
-                    className="h-12 sm:h-16 w-auto object-contain"
-                  />
-                </div>
+              <div className="pt-4 border-t border-stone-200">
+                <p className="text-sm sm:text-base text-stone-700 font-light text-center">
+                  Projekt predáva realitná kancelária Centrum Real
+                </p>
               </div>
             </div>
           </div>

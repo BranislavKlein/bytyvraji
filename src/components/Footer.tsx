@@ -67,8 +67,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-stone-800 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-stone-400">
-          <p className="font-light px-4">&copy; {new Date().getFullYear()} REAL CENTRUM. Všetky práva vyhradené.</p>
+        <div className="border-t border-stone-800 pt-6 sm:pt-8">
+          <div className="flex justify-center mb-6">
+            <div className="bg-white px-8 py-4 rounded-lg shadow-lg">
+              <img
+                src="https://bytyvraji.sk/centrum_real.png"
+                alt="Centrum Real"
+                className="h-12 sm:h-16 w-auto object-contain"
+              />
+            </div>
+          </div>
+          <p className="text-center text-xs sm:text-sm text-stone-400 font-light px-4">&copy; {new Date().getFullYear()} REAL CENTRUM. Všetky práva vyhradené.</p>
         </div>
       </div>
     </footer>

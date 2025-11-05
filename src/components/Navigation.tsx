@@ -63,11 +63,25 @@ export default function Navigation() {
                 shouldBeTransparent ? 'text-white' : 'text-amber-600'
               }`} strokeWidth={1.5} />
             </div>
-            <h1 className={`text-sm sm:text-base lg:text-lg font-light tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-300 ${
-              shouldBeTransparent ? 'text-white' : 'text-stone-900'
-            }`}>
-              BYTY V RAJI
-            </h1>
+            <div className="flex flex-col">
+              <h1 className={`text-sm sm:text-base lg:text-lg font-light tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-300 ${
+                shouldBeTransparent ? 'text-white' : 'text-stone-900'
+              }`}>
+                BYTY V RAJI
+              </h1>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] sm:text-xs font-light tracking-wider transition-all duration-300 ${
+                  shouldBeTransparent ? 'text-white/80' : 'text-stone-600'
+                }`}>
+                  Centrum Real
+                </span>
+                <img
+                  src="https://bytyvraji.sk/centrum_real.png"
+                  alt="Centrum Real"
+                  className="h-3 sm:h-4 w-auto object-contain"
+                />
+              </div>
+            </div>
           </Link>
 
           <div className="hidden md:block">
