@@ -54,15 +54,15 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           <Link to="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
-            <div className={`relative p-2 sm:p-2.5 rounded-lg transition-all duration-300 ${
+            <div className={`relative p-1.5 sm:p-2 rounded-lg transition-all duration-300 ${
               shouldBeTransparent
-                ? 'bg-white/95 group-hover:bg-white'
-                : 'bg-white group-hover:bg-stone-50 border border-stone-200'
+                ? 'bg-white/20 group-hover:bg-white/30'
+                : 'bg-amber-50 group-hover:bg-amber-100'
             }`}>
               <img
                 src="https://bytyvraji.sk/centrum_real.png"
                 alt="Centrum Real"
-                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
               />
             </div>
             <div className="flex flex-col">
@@ -141,44 +141,167 @@ export default function Navigation() {
       </div>
 
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden fixed inset-0 top-16 sm:top-20 z-40 transition-all duration-500 ease-in-out ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className={`border-t ${
-          shouldBeTransparent
-            ? 'bg-black/95 backdrop-blur-lg border-white/20'
-            : 'bg-white border-stone-200'
-        }`}>
-          <div className="py-1">
-            <Link
-              to="/podorys"
-              className={mobileLinkClass('/podorys')}
-              onClick={() => setIsOpen(false)}
-            >
-              Pôdorys
-            </Link>
-            <Link
-              to="/o-projekte"
-              className={mobileLinkClass('/o-projekte')}
-              onClick={() => setIsOpen(false)}
-            >
-              O projekte
-            </Link>
-            <Link
-              to="/galeria"
-              className={mobileLinkClass('/galeria')}
-              onClick={() => setIsOpen(false)}
-            >
-              Galéria
-            </Link>
-            <Link
-              to="/kontakt"
-              className={mobileLinkClass('/kontakt')}
-              onClick={() => setIsOpen(false)}
-            >
-              Kontakt
-            </Link>
+        <div
+          className="absolute inset-0 bg-stone-900/80 backdrop-blur-md"
+          onClick={() => setIsOpen(false)}
+        />
+
+        <div className={`relative h-full flex flex-col bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 shadow-2xl transition-all duration-500 ease-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } max-w-sm`}>
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, rgb(217 119 6) 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }}></div>
+          </div>
+
+          <div className="relative px-6 py-8 border-b border-amber-500/20">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-amber-600/20 rounded-lg">
+                <img
+                  src="https://bytyvraji.sk/centrum_real.png"
+                  alt="Centrum Real"
+                  className="w-8 h-8 object-contain"
+                />
+              </div>
+              <div>
+                <h2 className="text-xl font-light tracking-widest text-white">BYTY V RAJI</h2>
+                <p className="text-xs text-amber-400 font-light tracking-wide">Centrum Real</p>
+              </div>
+            </div>
+          </div>
+
+          <nav className="relative flex-1 px-4 py-6 overflow-y-auto">
+            <div className="space-y-2">
+              <Link
+                to="/podorys"
+                onClick={() => setIsOpen(false)}
+                className={`group block px-5 py-4 rounded-xl transition-all duration-300 ${
+                  isActive('/podorys')
+                    ? 'bg-gradient-to-r from-amber-600 to-amber-500 shadow-lg shadow-amber-600/30'
+                    : 'bg-white/5 hover:bg-white/10 backdrop-blur-sm'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className={`text-base font-light tracking-wide ${
+                    isActive('/podorys') ? 'text-white' : 'text-stone-200 group-hover:text-white'
+                  }`}>
+                    Pôdorys
+                  </span>
+                  <svg className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 ${
+                    isActive('/podorys') ? 'text-white' : 'text-amber-500'
+                  }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+
+              <Link
+                to="/o-projekte"
+                onClick={() => setIsOpen(false)}
+                className={`group block px-5 py-4 rounded-xl transition-all duration-300 ${
+                  isActive('/o-projekte')
+                    ? 'bg-gradient-to-r from-amber-600 to-amber-500 shadow-lg shadow-amber-600/30'
+                    : 'bg-white/5 hover:bg-white/10 backdrop-blur-sm'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className={`text-base font-light tracking-wide ${
+                    isActive('/o-projekte') ? 'text-white' : 'text-stone-200 group-hover:text-white'
+                  }`}>
+                    O projekte
+                  </span>
+                  <svg className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 ${
+                    isActive('/o-projekte') ? 'text-white' : 'text-amber-500'
+                  }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+
+              <Link
+                to="/galeria"
+                onClick={() => setIsOpen(false)}
+                className={`group block px-5 py-4 rounded-xl transition-all duration-300 ${
+                  isActive('/galeria')
+                    ? 'bg-gradient-to-r from-amber-600 to-amber-500 shadow-lg shadow-amber-600/30'
+                    : 'bg-white/5 hover:bg-white/10 backdrop-blur-sm'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className={`text-base font-light tracking-wide ${
+                    isActive('/galeria') ? 'text-white' : 'text-stone-200 group-hover:text-white'
+                  }`}>
+                    Galéria
+                  </span>
+                  <svg className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 ${
+                    isActive('/galeria') ? 'text-white' : 'text-amber-500'
+                  }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+
+              <Link
+                to="/kontakt"
+                onClick={() => setIsOpen(false)}
+                className={`group block px-5 py-4 rounded-xl transition-all duration-300 ${
+                  isActive('/kontakt')
+                    ? 'bg-gradient-to-r from-amber-600 to-amber-500 shadow-lg shadow-amber-600/30'
+                    : 'bg-white/5 hover:bg-white/10 backdrop-blur-sm'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className={`text-base font-light tracking-wide ${
+                    isActive('/kontakt') ? 'text-white' : 'text-stone-200 group-hover:text-white'
+                  }`}>
+                    Kontakt
+                  </span>
+                  <svg className={`w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 ${
+                    isActive('/kontakt') ? 'text-white' : 'text-amber-500'
+                  }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            </div>
+          </nav>
+
+          <div className="relative px-6 py-6 border-t border-amber-500/20 bg-stone-900/50 backdrop-blur-sm">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-stone-300">
+                <div className="w-10 h-10 bg-amber-600/20 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs text-stone-400 font-light">Zavolajte</p>
+                  <a href="tel:+421948527246" className="text-sm text-white hover:text-amber-400 transition-colors font-light">
+                    +421 948 527 246
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 text-stone-300">
+                <div className="w-10 h-10 bg-amber-600/20 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs text-stone-400 font-light">Email</p>
+                  <a href="mailto:michaela.schutz@centrumreal.sk" className="text-sm text-white hover:text-amber-400 transition-colors font-light break-all">
+                    michaela.schutz@centrumreal.sk
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
